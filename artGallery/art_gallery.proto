@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package artGallery;
+
+message Author{
+    int32 aId = 1;
+    string name = 2;
+}
+
+message Picture{
+    int64 pId = 1;
+    int32 year =2;
+    string name = 3;
+    int32 width = 4;
+    int32 height = 5;
+}
+
+message GalleryReply{
+    int32 status = 1;
+    string message = 2;
+}
+
+message ShowAllPictures{
+
+}
+
+
+service ArtGallery{
+    rpc GetPictureByAuthor (Author) returns (stream Picture) {}// server-to-client
+    rpc BuyPicture (Picture) returns (GalleryReply){}//simple
+    rpc DonatePicture (Picture) returns (GalleryReply){}//simple rpc
+    rpc ListOfAllPictures (ShowAllPictures) returns (stream Picture){}//server to client
+}
